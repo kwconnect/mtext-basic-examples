@@ -1,17 +1,4 @@
 package mtext.examples;
-/*
- * Copyright (c) 2015 kuehn & weyh Software GmbH
- * Freiburg, Germany
- * All rights reserved.
- *
- * This software is the confidential and proprietary information
- * of kuehn & weyh Software GmbH ("Confidential Information"). You
- * shall not disclose such Confidential Information and shall use
- * it only in accordance with the terms of the license agreement
- * you entered into with kuehn & weyh.
- */
-
-
 
 import java.io.FileInputStream;
 import java.io.IOException;
