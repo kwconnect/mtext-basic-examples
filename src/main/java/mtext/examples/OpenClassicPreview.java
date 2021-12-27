@@ -9,12 +9,12 @@ import de.kwsoft.mtext.api.client.MTextClient;
 import de.kwsoft.mtext.api.client.MTextFactory;
 
 /**
- * M/Text client API example: Opens the Classic Editor (Java Swing Client) with
- * an existing M/TEXT document.
+ * M/Text client API example: Opens the Classic Editor Preview (Java Swing
+ * Client) with an existing M/TEXT document.
  **/
-public class OpenClassicEditor {
+public class OpenClassicPreview {
 	/**
-	 * Opens the Classic Editor (Java Swing Client) with an existing M/TEXT
+	 * Opens the Classic Editor Preview (Java Swing Client) with an existing M/TEXT
 	 * document.
 	 * 
 	 * @param args Command line arguments<br>
@@ -23,7 +23,8 @@ public class OpenClassicEditor {
 	 *             args[2] = fullQualifiedDocumentName<br>
 	 **/
 	public static void main(String[] args) {
-		MUtil.checkArguments(args, 3, OpenClassicEditor.class, "<name> <password> <fullQualifiedDocumentName>");
+
+		MUtil.checkArguments(args, 3, OpenClassicPreview.class, "<name> <password> <fullQualifiedDocumentName>");
 		final String username = args[0];
 		final String password = args[1];
 		final String fullQualifiedDocumentName = args[2];
@@ -39,30 +40,32 @@ public class OpenClassicEditor {
 
 			// create job
 			job = client.createJob();
+			
 			// begin job
 			job.begin();
+			
 			// open text document
-			textDocument = job.openTextDocument(fullQualifiedDocumentName, DocumentAccessMode.READ_WRITE, null);
-			// call the editor
-			job.editDocument(textDocument, null);
-			// save the document
-			textDocument.save();
+			textDocument = job.openTextDocument(fullQualifiedDocumentName, DocumentAccessMode.SHARED_READ_ONLY, null);
+			
+			// show print preview
+			job.showDocumentPreview(textDocument, null);
+			
 			// close the document
 			textDocument.close();
+			
 			// execute job
 			job.execute();
 
 		}
 		catch (MTextException mte) {
-			System.out.println("Cannot call the editor for this document!");
+			System.out.println("Cannot show preview");
 			mte.printStackTrace();
 		}
-		// close the client
 		finally {
+			// close the client
 			if (client != null) {
 				client.close();
 			}
 		}
-
 	}
 }
