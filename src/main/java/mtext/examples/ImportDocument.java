@@ -26,6 +26,7 @@ public class ImportDocument {
 	 *             args[0] = username<br>
 	 *             args[1] = password<br>
 	 *             args[2] = mtxz document<br>
+	 *             args[3] = target document name<br>
 	 **/
 	public static void main(String[] args) throws IOException {
 
