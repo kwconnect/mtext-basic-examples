@@ -11,7 +11,7 @@ import mtext.examples.util.MUtil;
  * M/Text client API example: Create a connection and close it
  **/
 public class CreateConnection {
-	
+
 	/**
 	 * Create a connection and close it
 	 * 
@@ -20,29 +20,24 @@ public class CreateConnection {
 	 *             args[1] = password
 	 **/
 	public static void main(String[] args) {
-		
+
+		// check whether we have correct number of arguments
+		MUtil.checkArguments(args, 2, "Usage: java mtext.examples.CreateConnection <name> <password>");
+
 		// initializations
 		MTextClient client = null;
-		
-		// check whether we have correct number of arguments
-		if (MUtil.checkArguments(args, 2)) {
-			try {
-				// connect to the server with the arguments name and password
-				client = MTextFactory.connect(args[0], args[1], null);
-				System.out.println("Created the connection succesfully!");
-				client.close();
-				System.out.println("The connection is closed!");
-			}
-			// the method connect(...) throws a MTextException
-			catch (MTextException me) {
-				System.out.println("Failed to connect to M/TEXT Client!");
-				me.printStackTrace();
-			}
+
+		try {
+			// connect to the server with the arguments name and password
+			client = MTextFactory.connect(args[0], args[1], null);
+			System.out.println("Created the connection succesfully!");
+			
+			client.close();
+			System.out.println("The connection is closed!");
 		}
-		else {
-			System.out.println("M/Text client api example: CreateConnection");
-			System.out.println();
-			System.out.println("Usage: java mtext.examples.CreateConnection <name> <password>");
+		catch (MTextException me) {
+			System.out.println("Failed to connect to M/TEXT Client!");
+			me.printStackTrace();
 		}
 	}
 }
