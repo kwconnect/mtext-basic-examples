@@ -167,3 +167,18 @@ Document: Willkommen_0001
          Metadata       :
                   METADATA.STATE = DELETED
 ```
+### GetMetadata
+The class `mtext.examples.GetMetadata` demonstrates how to access searchable Metadata of a given M/TEXT document.
+
+Arguments
+1. name of a technical user that is allowed to login to the M/TEXT server
+2. password of the technical user
+3. folder path of the document
+4. name of the document
+5. name of the Metadata
+
+```
+java mtext.examples.GetMetadata mtextuser mtextpassword mtextuser kwsoft \home\mtextuser mtext_example_0001 METADATA.STATE
+METADATA.STATE = Created
+```
+
