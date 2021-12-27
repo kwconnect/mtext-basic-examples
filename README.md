@@ -230,3 +230,35 @@ Arguments
 java mtext.examples.DeleteMetadata mtextuser mtextpassword mtextuser kwsoft \home\mtextuser mtext_example_0001 METADATA.DEFAULTOUTPUTTARGET
 Successfully removed Metadata METADATA.DEFAULTOUTPUTTARGET
 ```
+
+### GetClassicDocumentContent
+**Pleas note:** This example is not applicable for TONIC documents!
+
+The class `mtext.examples.GetClassicDocumentContent` demonstrates how to access the document content of a given M/TEXT document.
+
+Arguments
+1. name of a technical user that is allowed to login to the M/TEXT server
+2. password of the technical user
+3. folder path of the document
+4. name of the document
+
+```
+java mtext.examples.GetClassicDocumentContent mtextuser mtextpassword mtextuser kwsoft \home\mtextuser mtext_example_0001
+TextLine: .BASE bsp_ClassicAnschreiben
+TextLine: .DSC 
+TextLine: .USES Datenmodelle\Adresse AS $ADRESSE
+TextLine: .USES Datenmodelle\Sachbearbeiter AS $SB
+TextLine: .USES Datenmodelle\Briefdaten AS $BD
+ModelLine: \library\bsp_ClassicCommon\Bausteine\Adresse
+ModelLine: \\bsp_ClassicCommon\Bausteine\Betreff
+        Parameter1: 
+TextLine: .PAR
+TextLine: <F>Datum<N>: *MT-SDATE
+TextLine: .PAR
+TextLine: <F>Regressionstest<N>: *MT-REGRESSIONTEST
+ModelLine: \\bsp_ClassicCommon\Bausteine\Grussformel
+        Parameter1: 
+ModelLine: Bausteine\Bankeinzug
+ModelLine: Bausteine\AGB
+TextLine: 
+```
