@@ -170,6 +170,8 @@ Document: Willkommen_0001
 ### GetMetadata
 The class `mtext.examples.GetMetadata` demonstrates how to access searchable Metadata of a given M/TEXT document.
 
+Searchable Metadata is stored in a separate database table. You can access it via the DocumentInformation object. That access is faster, as it does not require to read the whole content of the document.
+
 Arguments
 1. name of a technical user that is allowed to login to the M/TEXT server
 2. password of the technical user
@@ -180,6 +182,22 @@ Arguments
 ```
 java mtext.examples.GetMetadata mtextuser mtextpassword mtextuser kwsoft \home\mtextuser mtext_example_0001 METADATA.STATE
 METADATA.STATE = Created
+```
+### GetMetadataNotSearchable
+The class `mtext.examples.GetMetadataNotSearchable` demonstrates how to access both types of Metadata (searchable and not searchable) of a given M/TEXT document.
+
+Not searchable Metadata is stored in the document itself. To get access you have to open the document in a first step. That access is more expensive than reading searchable Metadata.
+
+Arguments
+1. name of a technical user that is allowed to login to the M/TEXT server
+2. password of the technical user
+3. folder path of the document
+4. name of the document
+5. name of the Metadata
+
+```
+java mtext.examples.GetMetadataNotSearchable mtextuser mtextpassword mtextuser kwsoft \home\mtextuser mtext_example_0001 METADATA.DEFAULTOUTPUTTARGET
+METADATA.DEFAULTOUTPUTTARGET = PRINT
 ```
 
 ### SetMetadata
