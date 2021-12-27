@@ -124,7 +124,7 @@ Arguments
 5. name of the Metadata
 
 ```
-java mtext.examples.GetMetadata mtextuser mtextpassword mtextuser kwsoft \home\mtextuser mtext_example_0001 METADATA.STATE
+java mtext.examples.GetMetadata mtextuser mtextpassword \home\mtextuser mtext_example_0001 METADATA.STATE
 METADATA.STATE = Created
 ```
 ### GetMetadataNotSearchable
@@ -140,7 +140,7 @@ Arguments
 5. name of the Metadata
 
 ```
-java mtext.examples.GetMetadataNotSearchable mtextuser mtextpassword mtextuser kwsoft \home\mtextuser mtext_example_0001 METADATA.DEFAULTOUTPUTTARGET
+java mtext.examples.GetMetadataNotSearchable mtextuser mtextpassword \home\mtextuser mtext_example_0001 METADATA.DEFAULTOUTPUTTARGET
 METADATA.DEFAULTOUTPUTTARGET = PRINT
 ```
 
@@ -156,7 +156,7 @@ Arguments
 6. new value of the Metadata
 
 ```
-java mtext.examples.SetMetadata mtextuser mtextpassword mtextuser kwsoft \home\mtextuser mtext_example_0001 METADATA.STATE Deleted
+java mtext.examples.SetMetadata mtextuser mtextpassword \home\mtextuser mtext_example_0001 METADATA.STATE Deleted
 Successfully set Metadata METADATA.STATE = Deleted
 ```
 
@@ -171,9 +171,24 @@ Arguments
 5. name of the Metadata
 
 ```
-java mtext.examples.DeleteMetadata mtextuser mtextpassword mtextuser kwsoft \home\mtextuser mtext_example_0001 METADATA.DEFAULTOUTPUTTARGET
+java mtext.examples.DeleteMetadata mtextuser mtextpassword \home\mtextuser mtext_example_0001 METADATA.DEFAULTOUTPUTTARGET
 Successfully removed Metadata METADATA.DEFAULTOUTPUTTARGET
 ```
+### OpenTemplateSelectionDialog
+The class `mtext.examples.OpenTemplateSelectionDialog` demonstrates how to show a Template Selection Dialog.
+
+Arguments
+1. name of a technical user that is allowed to login to the M/TEXT server
+2. password of the technical user
+3. **optional** filter key, which is used to restrict the template selection according to the Metadata 'Metadata.Sparte'
+
+```
+java mtext.examples.OpenTemplateSelectionDialog mtextuser mtextpassword 
+```
+
+![image](https://user-images.githubusercontent.com/8683821/147480261-cff0feb9-32c4-45bc-8a3b-9ea23506b9b2.png)
+
+
 ### Working with Folders
 
 #### CreateFolder
@@ -264,7 +279,7 @@ Arguments
 4. name of the document
 
 ```
-java mtext.examples.GetClassicDocumentContent mtextuser mtextpassword mtextuser kwsoft \home\mtextuser mtext_example_0001
+java mtext.examples.GetClassicDocumentContent mtextuser mtextpassword \home\mtextuser mtext_example_0001
 TextLine: .BASE bsp_ClassicAnschreiben
 TextLine: .DSC 
 TextLine: .USES Datenmodelle\Adresse AS $ADRESSE
