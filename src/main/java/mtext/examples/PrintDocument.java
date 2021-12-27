@@ -1,97 +1,82 @@
 package mtext.examples;
 
 import mtext.examples.util.MUtil;
+import de.kwsoft.mtext.api.Configuration;
 import de.kwsoft.mtext.api.DocumentAccessMode;
 import de.kwsoft.mtext.api.MTextException;
 import de.kwsoft.mtext.api.PersistentTextDocument;
+import de.kwsoft.mtext.api.PrintResult;
 import de.kwsoft.mtext.api.client.ClientJob;
 import de.kwsoft.mtext.api.client.MTextClient;
 import de.kwsoft.mtext.api.client.MTextFactory;
 
 /**
- * Print the document, which is specified by the folder path
- * @author Timo Dreier
+ * M/Text client API example: Prints an existing M/TEXT document to M/OMS.
  **/
-public class PrintDocument
-{
-  /**
-   * print a document on the standard mtext printer
-   * @param args Command line arguments<br>
-   * args[0]  = name<br>
-   * args[1]  = password<br>
-   * args[2]  = folder path<br>
-   * args[3]  = document name<br>
-   * args[4]  = printer name<br>
-   **/
-  public static void main(String[] args)
-  {
-    //initializations
-    MTextClient client = null;
-    ClientJob job = null;
-    PersistentTextDocument textDocument = null;
+public class PrintDocument {
+	/**
+	 * Prints an existing M/TEXT document to M/OMS.
+	 * 
+	 * @param args Command line arguments<br>
+	 *             args[0] = username<br>
+	 *             args[1] = password<br>
+	 *             args[2] = fully qualified document name<br>
+	 **/
+	public static void main(String[] args) {
 
-    // Check whether we have correct number of arguments
-    if(MUtil.checkArguments(args, 5))
-    {
-      final String name = args[0];
-      final String pwd = args[1];
-      final String folderPath = args[2];
-      final String documentName = args[3];
-      final String printerName = args[4];
-      final String fullQualifiedDocumentName;
+		MUtil.checkArguments(args, 3, PrintDocument.class, "<username> <password> <documentName>");
+		
+		final String username = args[0];
+		final String password = args[1];
+		final String documentName = args[2];
+		final String destination = "OMS";
 
-      if (".".equals(folderPath))
-      {
-        // Retreive document from default folder of the user if no folder name is given
-        fullQualifiedDocumentName = documentName;
-      }
-      else
-      {
-        fullQualifiedDocumentName = folderPath + "\\" + documentName;
-      }
+		// initializations
+		MTextClient client = null;
+		ClientJob job = null;
+		PersistentTextDocument textDocument = null;
 
-      try
-      {
-        //connect to server
-        client = MTextFactory.connect(name, pwd, null);
+		try {
+			// connect to server
+			client = MTextFactory.connect(username, password, null);
 
-        //create job
-        job = client.createJob();
-        //begin job
-        job.begin();
-        //open text document
-        textDocument = job.openTextDocument(
-                       fullQualifiedDocumentName,
-                       DocumentAccessMode.SHARED_READ_ONLY, null);
-        //print document
-        job.printDocument(textDocument, printerName, null);
-//        job.printDocumentOnLocalPrinter(textDocument, printerName, null);
-        //close the document
-        textDocument.close();
-        //execute job
-        job.execute();
+			// create job
+			job = client.createJob();
+			
+			// begin job
+			job.begin();
+			
+			// open text document
+			textDocument = job.openTextDocument(documentName, DocumentAccessMode.SHARED_READ_ONLY, null);
+			
+			// print document
+			Configuration printConfiguration = client.getConfigurationFactory().newPrintConfiguration();
+			PrintResult printResult = client.getConfigurationFactory().newPrintResult();
+			job.printDocument(textDocument, destination, printConfiguration, printResult);
+			
+			// close the document
+			textDocument.close();
+			
+			// execute job
+			job.execute();
 
-      //M/Text exception occured
-      }catch(MTextException mte)
-      {
-        System.out.println("Cannot print the document!");
-        mte.printStackTrace();
-      }
-      //close the client
-      finally
-      {
-        if(client != null)
-          client.close();
-      }
-    }
-    else
-    {
-      System.out.println("M/TEXT client api example: PrintDocument");
-            System.out.println();
-            System.out.println("Usage: java mtext.examples.PrintDocument " +
-                "<name> <password> <folder path> <document name>" +
-                "<printer name> "
-                );
-    }
-  }
+			for (String printResultKey: printResult.getKeys()) {
+				Object entry = printResult.get(printResultKey);
+				System.out.println(printResultKey + ": " + entry);
+			}
+			
+		}
+		catch (MTextException mte) {
+			System.out.println("Failed to print the document!");
+			mte.printStackTrace();
+		}
+		finally {
+
+			// close the client
+			if (client != null) {
+				client.close();
+			}
+		}
+
+	}
 }
