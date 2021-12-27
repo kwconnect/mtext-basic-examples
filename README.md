@@ -52,7 +52,7 @@ Arguments
 6. the path to the data source file (XML or JSON)
 
 ```
-java mtext.examples.CreateConnection mtextuser mtextpassword bsp_Anschreiben \\bsp_Anschreiben\Vorlagen\Willkommen.template Brief D:\workspace\bsp_Global\Testdaten\Daten_01.xml
+java mtext.examples.CreateDocument mtextuser mtextpassword bsp_Anschreiben \\bsp_Anschreiben\Vorlagen\Willkommen.template Brief D:\workspace\bsp_Global\Testdaten\Daten_01.xml
 Successfully connected to M/TEXT Client!
 Successfully created document: \home\seriem\mtext_example_0003
 ```
@@ -138,7 +138,32 @@ Arguments
 3. fully qualified name of the M/TEXT document that is to be edited
 
 ```
-java mtext.examples.GetAllFolders mtextuser mtextpassword \home\mtextuser\Willkommen_0001
+java mtext.examples.OpenClassicEditor mtextuser mtextpassword \home\mtextuser\Willkommen_0001
 ```
 
 ![image](https://user-images.githubusercontent.com/8683821/147468627-65b6dcb2-17b3-46dd-bf3c-52c9b7e3c139.png)
+
+### GetDocumentInformation
+The class `mtext.examples.GetDocumentInformation` demonstrates how to get DocumentInformation for Documents and Models by iterating over 
+all DocumentIformations of the given folder.
+
+Arguments
+1. name of a technical user that is allowed to login to the M/TEXT server
+2. password of the technical user
+3. folder name
+
+```
+java mtext.examples.GetDocumentInformation mtextuser mtextpassword \home\mtextuser
+Dumping DocumentInformation for folder \home\mtextuser
+Document: Willkommen_0001
+         Qualified Name : \home\mtextuser\Wilkommen_0001
+         Description    : 
+         Created        :2021-12-15 10:44:03.94
+         Created by     :mtextuser
+         Modified       :2021-12-15 10:44:06.878
+         Modified by    :mtextuser
+         Printed        :1970-01-01 01:00:00.0
+         Printed by     :
+         Metadata       :
+                  METADATA.STATE = DELETED
+```
