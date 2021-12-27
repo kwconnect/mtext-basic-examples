@@ -1,5 +1,7 @@
 package mtext.examples.util;
 
+import java.io.File;
+
 /**
  * This class contains some static utility methods.
  **/
@@ -25,6 +27,12 @@ public final class MUtil {
 
 			throw new IllegalArgumentException("Usage: " + theClass.getName() + " " + usageMessage);
 		}
+	}
+	
+	public static File getFileInTempDirectory(String fileName) {
+		String tmpdir = System.getProperty("java.io.tmpdir");
+		
+		return new File(tmpdir, fileName);
 	}
 
 	/**

@@ -1,146 +1,125 @@
 package mtext.examples;
 
-import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStreamReader;
-import java.util.Iterator;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
-import de.kwsoft.mtext.api.DataModelNodeValidationFailedException;
-import de.kwsoft.mtext.api.MTextException;
+import org.apache.commons.io.FileUtils;
+
+import de.kwsoft.mtext.api.Configuration;
 import de.kwsoft.mtext.api.TemporaryTextDocument;
 import de.kwsoft.mtext.api.client.ClientJob;
 import de.kwsoft.mtext.api.client.MTextClient;
 import de.kwsoft.mtext.api.client.MTextFactory;
-import de.kwsoft.mtext.api.databinding.DataModelNode;
-import de.kwsoft.mtext.api.databinding.DataModelNodeValidation.ValidationValue;
+import de.kwsoft.mtext.api.databinding.DataSource;
 import de.kwsoft.mtext.api.databinding.DocumentDataBinding;
+import de.kwsoft.mtext.api.databinding.JSONDataSource;
 import de.kwsoft.mtext.api.databinding.XMLDataSource;
 import mtext.examples.util.MUtil;
 
 /**
- * Creates a document from data binding and shows it in preview.
+ * M/Text client API example: Creates a temporary document from data binding and
+ * exports a PDF file.
  **/
-public class CreateDocumentFromXML {
+public class ExportPDF {
 
 	/**
-	 * Shows a print preview of a document created using specified data binding,
-	 * getting the needed data sets from XML files.
+	 * Creates a temporary document from data binding and exports a PDF file.
 	 * 
 	 * @param args Command line arguments<br>
 	 *             args[0] = username<br>
 	 *             args[1] = password<br>
 	 *             args[2] = project name<br>
 	 *             args[3] = data binding name<br>
+	 *             args[4] = data source name<br>
+	 *             args[5] = data source file<br>
 	 **/
 	public static void main(String[] args) {
-		
-		MUtil.checkArguments(args, 4, CreateDocumentFromXML.class, "<username> <password> <projectName> <dataBindingName>");
-		
+
+		MUtil.checkArguments(args, 6, ExportPDF.class, "<username> <password> <projectName> <dataBindingName> <dataSourceName> <dataSourceFile>");
+
 		final String username = args[0];
 		final String password = args[1];
 		final String projectName = args[2];
 		final String dataBindingName = args[3];
-		
+		final String dataSourceName = args[4];
+		final String dataSourceFile = args[5];
+
 		// initializations
 		MTextClient client = null;
 		ClientJob job = null;
 		TemporaryTextDocument textDocument = null;
+		FileOutputStream fileOutputStream = null;
 
 		try {
-			// connect to server
+			// connect to client
 			client = MTextFactory.connect(username, password, null);
 
 			// create job
 			job = client.createJob();
+
 			// begin job
 			job.begin();
 			// open text document
-			textDocument = job.createTemporaryTextDocument("testDocument", projectName, null);
+			Configuration createDocumentConfiguration = client.getConfigurationFactory().newCreateTextDocumentConfiguration();
+			textDocument = job.createTemporaryTextDocument("temporary_document_*", projectName, createDocumentConfiguration);
+
+			// create Data Binding
 			final DocumentDataBinding binding = client.createDocumentDataBinding(projectName, dataBindingName);
-			fillDataSources(binding);
+
+			// Set the Data Source
+			binding.setDataSource(dataSourceName, getDataSource(dataSourceFile));
+
 			// execute the data binding to fill the document instance
-			textDocument.executeDocumentDataBinding(binding);
+			Configuration executeDataBindingConfiguration = client.getConfigurationFactory().newExecuteDocumentDataBindingConfiguration();
+			textDocument.executeDocumentDataBinding(binding, executeDataBindingConfiguration);
+
 			// export to pdf
-			job.exportDocument(textDocument, "application/pdf", new ByteArrayOutputStream(), client.getConfigurationFactory().newExportDocumentConfiguration(), null);
+			File pdfFile = MUtil.getFileInTempDirectory("Api_Export_Example.pdf");
+			fileOutputStream = new FileOutputStream(pdfFile);
+			job.exportDocument(textDocument, "application/pdf", fileOutputStream, client.getConfigurationFactory().newExportDocumentConfiguration(), null);
+			
 			// close the document
 			textDocument.close();
+			
 			// execute job
 			job.execute();
+
+			System.out.println("Successfully exported document to PDF file: " + pdfFile.getAbsolutePath());
 
 		}
 		catch (Exception mte) {
 			// M/Text exception occurred
-			if (mte instanceof MTextException) {
-				printMTextException((MTextException) mte);
-			}
-			else {
-				mte.printStackTrace();
-			}
+			mte.printStackTrace();
 		}
 		// close the client
 		finally {
-			if (client != null)
+
+			if (fileOutputStream != null) {
+				try {
+					fileOutputStream.close();
+				}
+				catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+
+			if (client != null) {
 				client.close();
-		}
-	}
-
-	private static void printMTextException(MTextException mte) {
-		printError(mte);
-		Iterator reasons = mte.getReasons();
-		while (reasons.hasNext()) {
-			Object reason = reasons.next();
-			if (reason instanceof MTextException) {
-				printMTextException((MTextException) reason);
-			}
-			else if (reason instanceof Throwable) {
-				printError((Throwable) reason);
-			}
-			else {
-				System.out.println(reason);
 			}
 		}
 	}
 
-	private static void printError(Throwable error) {
-		String message = error.getLocalizedMessage();
-		if (message == null) {
-			message = error.getMessage();
-		}
-		System.out.println(error.getClass() + " - " + message);
-		System.out.println("---");
-		if (error instanceof DataModelNodeValidationFailedException) {
-			DataModelNode node = ((DataModelNodeValidationFailedException) error).getNode();
-			System.out.println(node.getName());
-			System.out.println(node.getDataType());
-			System.out.println(node.getDialogLabel());
-			System.out.println(node.getValidation().getValidationType());
-			System.out.println(node.getValidation().getValidationOperator());
-			for (ValidationValue value : node.getValidation().getValdationValues()) {
-				System.out.println(value.getValue());
-				System.out.println(value.getDescription());
-			}
-			System.out.println("---");
-			System.out.println(node.getResourceName());
-			System.out.println(node.getReferenceResourceName());
-			System.out.println(node.isFromReference());
-			System.out.println(node.isLeaf());
-		}
-	}
+	private static DataSource getDataSource(String fileName) throws IOException {
 
-	private static void fillDataSources(final DocumentDataBinding binding) throws Exception {
-		for (String dataSourceName : new Iterable<String>() {
-			public Iterator<String> iterator() {
-				return binding.getDataSourceNames();
-			}
-		}) {
-			try {
-				binding.setDataSource(dataSourceName, new XMLDataSource(new InputStreamReader(new FileInputStream(dataSourceName + ".xml"), "utf-8")));
-			}
-			catch (FileNotFoundException e) {
-				System.out.println("Warning: cannot find the data source file, leaving unset");
-				e.printStackTrace(System.out);
-			}
+		if (fileName.toLowerCase().endsWith(".xml")) {
+			return new XMLDataSource(new File(fileName));
+		}
+		else if (fileName.toLowerCase().endsWith(".json")) {
+			return new JSONDataSource(FileUtils.readFileToString(new File(fileName)));
+		}
+		else {
+			throw new IllegalArgumentException("The type of file is not supported as a data source: " + fileName);
 		}
 	}
 

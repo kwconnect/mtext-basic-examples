@@ -23,7 +23,7 @@ import mtext.examples.util.MUtil;
 public class CreateDocument {
 
 	/**
-	 * M/Text client API example: Creates a document from data binding and prints
+	 * Creates a document from data binding and prints
 	 * the qualified document name.
 	 * 
 	 * @param args Command line arguments<br>
