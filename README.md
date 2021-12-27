@@ -36,6 +36,8 @@ Arguments:
 
 ```
 java mtext.examples.CreateConnection mtextuser mtextpassword
+Successfully connected to M/TEXT Client!
+The connection is closed!
 ```
 
 ### CreateDocument
@@ -51,6 +53,8 @@ Arguments
 
 ```
 java mtext.examples.CreateConnection mtextuser mtextpassword bsp_Anschreiben \\bsp_Anschreiben\Vorlagen\Willkommen.template Brief D:\workspace\bsp_Global\Testdaten\Daten_01.xml
+Successfully connected to M/TEXT Client!
+Successfully created document: \home\seriem\mtext_example_0003
 ```
 
 ### ExportPDF
@@ -66,4 +70,19 @@ Arguments
 
 ```
 java mtext.examples.ExportPDF mtextuser mtextpassword bsp_Anschreiben \\bsp_Anschreiben\Vorlagen\Willkommen.template Brief D:\workspace\bsp_Global\Testdaten\Daten_01.xml
+Successfully exported document to PDF file: C:\Users\flinstone\AppData\Local\Temp\Api_Export_Example.pdf
+```
+
+### PrintDocument
+The class `mtext.examples.PrintDocument` demonstrates how to print an existing M/TEXT document to M/OMS and handle the print result.
+
+Arguments
+1. name of a technical user that is allowed to login to the M/TEXT server
+2. password of the technical user
+3. the fully qualified name of an existing M/TEXT document
+
+```
+java mtext.examples.PrintDocument mtextuser mtextpassword \home\seriem\mtext_example_0001
+Successfully printed the document to M/OMS.
+The M/OMS Input ID is 58
 ```
