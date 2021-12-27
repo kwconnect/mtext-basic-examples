@@ -15,6 +15,7 @@ import mtext.examples.util.MUtil;
  * of a document.
  **/
 public class SetMetadata {
+	
 	/**
 	 * Set the value of a specific (searchable) Metadata of a document.
 	 * 
