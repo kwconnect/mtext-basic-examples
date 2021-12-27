@@ -216,3 +216,17 @@ java mtext.examples.SetMetadata mtextuser mtextpassword mtextuser kwsoft \home\m
 Successfully set Metadata METADATA.STATE = Deleted
 ```
 
+### DeleteMetadata
+The class `mtext.examples.DeleteMetadata` demonstrates how to delete a specific Metadata from a given M/TEXT document.
+
+Arguments
+1. name of a technical user that is allowed to login to the M/TEXT server
+2. password of the technical user
+3. folder path of the document
+4. name of the document
+5. name of the Metadata
+
+```
+java mtext.examples.DeleteMetadata mtextuser mtextpassword mtextuser kwsoft \home\mtextuser mtext_example_0001 METADATA.DEFAULTOUTPUTTARGET
+Successfully removed Metadata METADATA.DEFAULTOUTPUTTARGET
+```
