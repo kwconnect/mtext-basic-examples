@@ -11,12 +11,11 @@ import de.kwsoft.mtext.api.client.MTextFactory;
 import mtext.examples.util.MUtil;
 
 /**
- * M/Text client API example: Set the value of a specific (searchable) Metadata
- * of a document.
+ * M/Text client API example: Deletes a specific Metadata from a document.
  **/
-public class SetMetadata {
+public class DeleteMetadata {
 	/**
-	 * Set the value of a specific (searchable) Metadata of a document.
+	 * Deletes a specific Metadata from a document.
 	 * 
 	 * @param args Command line arguments<br>
 	 *             args[0] = username<br>
@@ -28,13 +27,12 @@ public class SetMetadata {
 	 **/
 	public static void main(String[] args) {
 
-		MUtil.checkArguments(args, 6, SetMetadata.class, "<username> <password> <folderPath> <docuentName> <metadataKey> <metadataValue>");
+		MUtil.checkArguments(args, 5, DeleteMetadata.class, "<username> <password> <folderPath> <docuentName> <metadataKey>");
 		final String username = args[0];
 		final String password = args[1];
 		final String folderPath = args[2];
 		final String documentName = args[3];
 		final String metadataKey = args[4];
-		final String metadataValue = args[5];
 
 		// initializations
 		MTextClient client = null;
@@ -77,8 +75,7 @@ public class SetMetadata {
 			metadata = documentInformation.getMetadata();
 			
 			// add the new property to the properties
-			metadata.setValue(metadataKey, metadataValue);
-			
+			metadata.remove(metadataKey);
 			
 			// set the new properties
 			textDocument.setMetadata(metadata);
@@ -89,7 +86,7 @@ public class SetMetadata {
 			// execute the job
 			job.execute();
 			
-			System.out.println("Successfully set Metadata " + metadataKey + " = " + metadataValue);
+			System.out.println("Successfully removed Metadata " + metadataKey);
 		}
 		// M/Text exception occured
 		catch (MTextException me) {
