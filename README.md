@@ -111,3 +111,19 @@ Arguments
 java mtext.examples.DeleteFolder mtextuser mtextpassword \home\mtextuser newfolder
 Successfully deleted new folder \home\mtextuser\newfolder
 ```
+
+### GetAllFolders
+The class `mtext.examples.GetAllFolders` recursively outputs all folders in the system.
+
+Arguments
+1. name of a technical user that is allowed to login to the M/TEXT server
+2. password of the technical user
+
+```
+java mtext.examples.GetAllFolders mtextuser mtextpassword \home\mtextuser newfolder
+   home
+      MASTER
+      flinstone
+      mtextuser
+         subfolder1
+```
