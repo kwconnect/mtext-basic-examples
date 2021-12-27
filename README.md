@@ -86,3 +86,28 @@ java mtext.examples.PrintDocument mtextuser mtextpassword \home\seriem\mtext_exa
 Successfully printed the document to M/OMS.
 The M/OMS Input ID is 58
 ```
+### CreateFolder
+The class `mtext.examples.CreateFolder` demonstrates how to create a new folder in a specified parent folder.
+
+Arguments
+1. name of a technical user that is allowed to login to the M/TEXT server
+2. password of the technical user
+3. path of the parent folder (e. g. \home\mtextuser)
+4. the name of the folder to be created
+
+```
+java mtext.examples.CreateFolder mtextuser mtextpassword \home\mtextuser newfolder
+Successfully created new folder \home\mtextuser\newfolder
+```
+### DeleteFolder
+The class `mtext.examples.DeleteFolder` demonstrates how to delete a folder.
+
+Arguments
+1. name of a technical user that is allowed to login to the M/TEXT server
+2. password of the technical user
+3. fully qualified path of the folder to be deleted (e. g. \home\mtextuser\newfolder)
+
+```
+java mtext.examples.DeleteFolder mtextuser mtextpassword \home\mtextuser newfolder
+Successfully deleted new folder \home\mtextuser\newfolder
+```
