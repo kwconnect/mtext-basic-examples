@@ -14,7 +14,7 @@ public final class MUtil {
 
 	public static void checkArguments(String[] args, int argumentCount, Class<?> theClass, String usageMessage) {
 
-		if (args.length == argumentCount) {
+		if (args.length >= argumentCount) {
 			return;
 		}
 		else {
