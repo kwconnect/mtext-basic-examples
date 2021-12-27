@@ -59,10 +59,17 @@ public class PrintDocument {
 			
 			// execute job
 			job.execute();
+			
+			System.out.println("Successfully printed the document to M/OMS.");
 
 			for (String printResultKey: printResult.getKeys()) {
 				Object entry = printResult.get(printResultKey);
-				System.out.println(printResultKey + ": " + entry);
+				
+				if ("InputId".equals(printResultKey)) {
+					long inputId = (Long) entry;
+					
+					System.out.println("The M/OMS Input ID is " + inputId);
+				}
 			}
 			
 		}
