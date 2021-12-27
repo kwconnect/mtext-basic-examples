@@ -174,6 +174,21 @@ Arguments
 java mtext.examples.DeleteMetadata mtextuser mtextpassword \home\mtextuser mtext_example_0001 METADATA.DEFAULTOUTPUTTARGET
 Successfully removed Metadata METADATA.DEFAULTOUTPUTTARGET
 ```
+
+### ImportDocument
+The class `mtext.examples.DeleteMetadata` demonstrates how to import a mtxz file to the M/TEXT Server.
+
+Arguments
+1. name of a technical user that is allowed to login to the M/TEXT server
+2. password of the technical user
+3. path to the mtxz file
+4. name of the document to be created
+
+```
+java mtext.examples.ImportDocument mtextuser mtextpassword \home\mtextuser D:\temp\exported.mtxz imported_0001
+Successfully imported document \home\seriem\imported_0001
+```
+
 ### OpenTemplateSelectionDialog
 The class `mtext.examples.OpenTemplateSelectionDialog` demonstrates how to show a Template Selection Dialog.
 
