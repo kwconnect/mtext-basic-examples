@@ -22,13 +22,13 @@ public class GetMetadata {
 	 *             args[0] = username<br>
 	 *             args[1] = password<br>
 	 *             args[2] = folderPath<br>
-	 *             args[2] = document name<br>
-	 *             args[3] = Metadata name
+	 *             args[3] = document name<br>
+	 *             args[4] = Metadata name
 	 **/
 	@SuppressWarnings("rawtypes")
 	public static void main(String[] args) {
 
-		MUtil.checkArguments(args, 5, GetMetadata.class, "<username> <password> <folderPath> <docuentName> <metadatakey>");
+		MUtil.checkArguments(args, 5, GetMetadata.class, "<username> <password> <folderPath> <docuentName> <metadataKey>");
 		final String username = args[0];
 		final String password = args[1];
 		final String folderPath = args[2];
