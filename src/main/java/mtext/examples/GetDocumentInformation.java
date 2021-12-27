@@ -1,124 +1,118 @@
 package mtext.examples;
 
 import java.util.Iterator;
-import java.util.Map;
-import de.kwsoft.mtext.api.*;
+
+import de.kwsoft.mtext.api.AbstractFolder;
+import de.kwsoft.mtext.api.DocumentInformation;
+import de.kwsoft.mtext.api.Folder;
+import de.kwsoft.mtext.api.MTextException;
+import de.kwsoft.mtext.api.ReadOnlyListIterator;
+import de.kwsoft.mtext.api.TextDocumentInformation;
 import de.kwsoft.mtext.api.client.MTextClient;
 import de.kwsoft.mtext.api.client.MTextFactory;
 import mtext.examples.util.MUtil;
 
 /**
- * M/Text client API example: Get all document information of a
- * specified folder
- * @author Timo Dreier
+ * M/Text client API example: Get all document information of a specified folder
  **/
 public class GetDocumentInformation {
-    /**
-     * Get information of all documents, which belongs to a specified folder
-     * @param args Command line arguments<br>
-     * args[0] = username<br>
-     * args[1] = password<br>
-     * arsg[2] = folder path
-     **/
-    public static void main(String[] args) {
-        // initializations
-        MTextClient client = null;
-        ReadOnlyListIterator listIter = null;
-        AbstractFolder folder = null;
-        // Check whether we have correct number of arguments
-        if (MUtil.checkArguments(args, 3)) {
-            final String name = args[0];
-            final String pwd = args[1];
-            final String folderPath = args[2];
-            try {
-                // connect
-                client = MTextFactory.connect(name, pwd, null);
-                // get the folder
-                folder = client.getRootFolder().getFolderByName(folderPath);
-                if (folder instanceof Folder) {
-                    // show text document information
-                    System.out.println("Text document information");
-                    // get the iterator with the text document informations
-                    listIter = ((Folder)folder).getTextDocumentInformation();
-                    // show the information
-                    showDocumentInformation(listIter);
-                    // show model document information
-                    System.out.println("Model document information");
-                    // get the iterator with the model document informations
-                    listIter = ((Folder)folder).getModelDocumentInformation();
-                    // show the information
-                    showDocumentInformation(listIter);
-                }
-                else {
-                    System.out.println("Root folder does not contain document" +
-                        "information !");
-                }
-            }
-            // M/Text exception occured
-            catch (MTextException me) {
-                System.out.println(
-                    "Error during showing document information !");
-                me.printStackTrace();
-            }
-            // general exception  e.g. path of folder is wrong -> folder =  null
-            catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        else {
-            System.out.println(
-                "M/Text client api example: GetDocumentInformation");
-            System.out.println();
-            System.out.println(
-                "Usage: java mtext.examples.GetDocumentInformation " +
-                "<name> <password> <folder path>");
-        }
-    }
+	/**
+	 * Get information of all documents, which belongs to a specified folder
+	 * 
+	 * @param args Command line arguments<br>
+	 *             args[0] = username<br>
+	 *             args[1] = password<br>
+	 *             arsg[2] = folder path
+	 **/
+	public static void main(String[] args) {
 
-    /**
-     * Iterate of the specified iterator and show all DocumentInformation
-     * @param iterator Contains DocumentInformation objects
-     **/
-    private static void showDocumentInformation(ReadOnlyListIterator
-        iterator) {
-            final String indent = "         ";
-            final String propIndent = indent + indent;
-            Iterator propertyIterator = null;
-            DocumentInformation docInf = null;
-            Map.Entry property = null;
-            while (iterator.hasNext()) {
-                docInf = (DocumentInformation)iterator.next();
-                if (docInf instanceof TextDocumentInformation) {
-                    System.out.print("Text  : ");
-                }
-                else {
-                    System.out.print("Model : ");
-                }
-                System.out.println(docInf.getDocumentName());
-                System.out.println(indent + "Qualified Name : " +
-                    docInf.getQualifiedDocumentName());
-                System.out.println(indent + "Description    : " +
-                    docInf.getDocumentDescription());
-                System.out.println(indent + "Created        :" +
-                    docInf.getCreationTimestamp());
-                System.out.println(indent + "Created by     :" +
-                    docInf.getCreationPrincipal().getName());
-                System.out.println(indent + "Modified       :" +
-                    docInf.getLastModifiedTimestamp());
-                System.out.println(indent + "Modified by    :" +
-                    docInf.getLastModifiedPrincipal().getName());
-                System.out.println(indent + "Printed        :" +
-                    docInf.getLastPrintedTimestamp());
-                System.out.println(indent + "Printed by     :" +
-                    docInf.getLastPrintedPrincipal().getName());
-                System.out.println(indent + "User def. properties  :");
-                propertyIterator =
-                    docInf.getUserDefinedProperties().entrySet().iterator();
-                while (propertyIterator.hasNext()) {
-                    property = (Map.Entry) propertyIterator.next();
-                    System.out.println(propIndent + property.getKey() + " = " +
-                        property.getValue());
-                }
-            }
-    }
+		MUtil.checkArguments(args, 3, GetDocumentInformation.class, "<username> <password> <folder path>");
+		final String username = args[0];
+		final String password = args[1];
+		final String folderPath = args[2];
+
+		// initializations
+		MTextClient client = null;
+		
+		@SuppressWarnings("rawtypes")
+		ReadOnlyListIterator listIterator = null;
+		AbstractFolder folder = null;
+		try {
+			// connect
+			client = MTextFactory.connect(username, password, null);
+			// get the folder
+			folder = client.getRootFolder().getFolderByName(folderPath);
+			
+			System.out.println("Dumping DocumentInformation for folder " + folderPath);
+			if (folder instanceof Folder) {
+
+				// get the iterator with the text document informations
+				listIterator = ((Folder) folder).getTextDocumentInformation();
+				// show the information
+				showDocumentInformation(listIterator);
+
+				// get the iterator with the model document informations
+				listIterator = ((Folder) folder).getModelDocumentInformation();
+				// show the information
+				showDocumentInformation(listIterator);
+			}
+			else {
+				System.out.println("Root folder does not contain document information !");
+			}
+		}
+		catch (MTextException me) {
+			// M/Text exception occured
+			System.out.println("Error during showing document information !");
+			me.printStackTrace();
+		}
+		// general exception e.g. path of folder is wrong -> folder = null
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	/**
+	 * Iterate of the specified iterator and show all DocumentInformation
+	 * 
+	 * @param iterator Contains DocumentInformation objects
+	 **/
+	@SuppressWarnings("rawtypes")
+	private static void showDocumentInformation(ReadOnlyListIterator iterator) {
+		
+		final String indent = "         ";
+		DocumentInformation documentInformation = null;
+		
+		while (iterator.hasNext()) {
+			documentInformation = (DocumentInformation) iterator.next();
+			if (documentInformation instanceof TextDocumentInformation) {
+				System.out.print("Document: ");
+			}
+			else {
+				System.out.print("Model: ");
+			}
+			System.out.println(documentInformation.getDocumentName());
+			System.out.println(indent + "Qualified Name : " + documentInformation.getQualifiedDocumentName());
+			System.out.println(indent + "Description    : " + documentInformation.getDocumentDescription());
+			System.out.println(indent + "Created        :" + documentInformation.getCreationTimestamp());
+			System.out.println(indent + "Created by     :" + documentInformation.getCreationPrincipal().getName());
+			System.out.println(indent + "Modified       :" + documentInformation.getLastModifiedTimestamp());
+			System.out.println(indent + "Modified by    :" + documentInformation.getLastModifiedPrincipal().getName());
+			System.out.println(indent + "Printed        :" + documentInformation.getLastPrintedTimestamp());
+			System.out.println(indent + "Printed by     :" + documentInformation.getLastPrintedPrincipal().getName());
+			System.out.println(indent + "Metadata       :");
+			
+			Iterator<String> metadataIterator = documentInformation.getMetadata().getKeyNames();
+			
+			if (!metadataIterator.hasNext()) {
+				System.out.println(indent + indent + "No Metadata found!");
+			}
+			
+			while (metadataIterator.hasNext()) {
+				String metadataKey = metadataIterator.next();
+				String metadataValue = documentInformation.getMetadata().getSingleValue(metadataKey);
+				System.out.println(indent + indent + metadataKey + " = " + metadataValue);
+			}
+		}
+	}
 }
