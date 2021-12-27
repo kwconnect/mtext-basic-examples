@@ -86,62 +86,6 @@ java mtext.examples.PrintDocument mtextuser mtextpassword \home\seriem\mtext_exa
 Successfully printed the document to M/OMS.
 The M/OMS Input ID is 58
 ```
-### CreateFolder
-The class `mtext.examples.CreateFolder` demonstrates how to create a new folder in a specified parent folder.
-
-Arguments
-1. name of a technical user that is allowed to login to the M/TEXT server
-2. password of the technical user
-3. path of the parent folder (e. g. \home\mtextuser)
-4. the name of the folder to be created
-
-```
-java mtext.examples.CreateFolder mtextuser mtextpassword \home\mtextuser newfolder
-Successfully created new folder \home\mtextuser\newfolder
-```
-### DeleteFolder
-The class `mtext.examples.DeleteFolder` demonstrates how to delete a folder.
-
-Arguments
-1. name of a technical user that is allowed to login to the M/TEXT server
-2. password of the technical user
-3. fully qualified path of the folder to be deleted (e. g. \home\mtextuser\newfolder)
-
-```
-java mtext.examples.DeleteFolder mtextuser mtextpassword \home\mtextuser newfolder
-Successfully deleted new folder \home\mtextuser\newfolder
-```
-
-### GetAllFolders
-The class `mtext.examples.GetAllFolders` recursively outputs all folders in the system.
-
-Arguments
-1. name of a technical user that is allowed to login to the M/TEXT server
-2. password of the technical user
-
-```
-java mtext.examples.GetAllFolders mtextuser mtextpassword \home\mtextuser newfolder
-   home
-      MASTER
-      flinstone
-      mtextuser
-         subfolder1
-```
-
-### OpenClassicEditor
-The class `mtext.examples.OpenClassicEditor` demonstrates how to edit an existing M/TEXT Classic document with the Java Swing client.
-**Pleas note:** This example is not applicable for TONIC documents!
-
-Arguments
-1. name of a technical user that is allowed to login to the M/TEXT server
-2. password of the technical user
-3. fully qualified name of the M/TEXT document that is to be edited
-
-```
-java mtext.examples.OpenClassicEditor mtextuser mtextpassword \home\mtextuser\Willkommen_0001
-```
-
-![image](https://user-images.githubusercontent.com/8683821/147468627-65b6dcb2-17b3-46dd-bf3c-52c9b7e3c139.png)
 
 ### GetDocumentInformation
 The class `mtext.examples.GetDocumentInformation` demonstrates how to get DocumentInformation for Documents and Models by iterating over 
@@ -230,8 +174,85 @@ Arguments
 java mtext.examples.DeleteMetadata mtextuser mtextpassword mtextuser kwsoft \home\mtextuser mtext_example_0001 METADATA.DEFAULTOUTPUTTARGET
 Successfully removed Metadata METADATA.DEFAULTOUTPUTTARGET
 ```
+### Working with Folders
 
-### GetClassicDocumentContent
+#### CreateFolder
+The class `mtext.examples.CreateFolder` demonstrates how to create a new folder in a specified parent folder.
+
+Arguments
+1. name of a technical user that is allowed to login to the M/TEXT server
+2. password of the technical user
+3. path of the parent folder (e. g. \home\mtextuser)
+4. the name of the folder to be created
+
+```
+java mtext.examples.CreateFolder mtextuser mtextpassword \home\mtextuser newfolder
+Successfully created new folder \home\mtextuser\newfolder
+```
+#### DeleteFolder
+The class `mtext.examples.DeleteFolder` demonstrates how to delete a folder.
+
+Arguments
+1. name of a technical user that is allowed to login to the M/TEXT server
+2. password of the technical user
+3. fully qualified path of the folder to be deleted (e. g. \home\mtextuser\newfolder)
+
+```
+java mtext.examples.DeleteFolder mtextuser mtextpassword \home\mtextuser newfolder
+Successfully deleted new folder \home\mtextuser\newfolder
+```
+
+#### GetAllFolders
+The class `mtext.examples.GetAllFolders` recursively outputs all folders in the system.
+
+Arguments
+1. name of a technical user that is allowed to login to the M/TEXT server
+2. password of the technical user
+
+```
+java mtext.examples.GetAllFolders mtextuser mtextpassword \home\mtextuser newfolder
+   home
+      MASTER
+      flinstone
+      mtextuser
+         subfolder1
+```
+
+### M/TEXT Classic Examples
+
+#### OpenClassicEditor
+**Pleas note:** This example is not applicable for TONIC documents!
+
+The class `mtext.examples.OpenClassicEditor` demonstrates how to edit an existing M/TEXT Classic document with the Java Swing client.
+
+Arguments
+1. name of a technical user that is allowed to login to the M/TEXT server
+2. password of the technical user
+3. fully qualified name of the M/TEXT document that is to be edited
+
+```
+java mtext.examples.OpenClassicEditor mtextuser mtextpassword \home\mtextuser\Willkommen_0001
+```
+
+![image](https://user-images.githubusercontent.com/8683821/147468627-65b6dcb2-17b3-46dd-bf3c-52c9b7e3c139.png)
+
+#### OpenClassicPreview
+**Pleas note:** This example is not applicable for TONIC documents!
+
+The class `mtext.examples.OpenClassicPreview` demonstrates how to show the preview for an existing M/TEXT Classic document with the Java Swing client.
+
+Arguments
+1. name of a technical user that is allowed to login to the M/TEXT server
+2. password of the technical user
+3. fully qualified name of the M/TEXT document that is to be edited
+
+```
+java mtext.examples.OpenClassicPreview mtextuser mtextpassword \home\mtextuser\Willkommen_0002
+```
+
+![image](https://user-images.githubusercontent.com/8683821/147477743-2e50d818-c8ef-4437-a33c-b528b45098ed.png)
+
+#### GetClassicDocumentContent
 **Pleas note:** This example is not applicable for TONIC documents!
 
 The class `mtext.examples.GetClassicDocumentContent` demonstrates how to access the document content of a given M/TEXT document.
