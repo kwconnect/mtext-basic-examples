@@ -21,6 +21,7 @@ public class GetMetadata {
 	 * @param args Command line arguments<br>
 	 *             args[0] = username<br>
 	 *             args[1] = password<br>
+	 *             args[2] = folderPath<br>
 	 *             args[2] = document name<br>
 	 *             args[3] = Metadata name
 	 **/
