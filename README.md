@@ -127,3 +127,18 @@ java mtext.examples.GetAllFolders mtextuser mtextpassword \home\mtextuser newfol
       mtextuser
          subfolder1
 ```
+
+### OpenClassicEditor
+The class `mtext.examples.OpenClassicEditor` demonstrates how to edit an existing M/TEXT Classic document with the Java Swing client.
+**Pleas note:** This example is not applicable for TONIC documents!
+
+Arguments
+1. name of a technical user that is allowed to login to the M/TEXT server
+2. password of the technical user
+3. fully qualified name of the M/TEXT document that is to be edited
+
+```
+java mtext.examples.GetAllFolders mtextuser mtextpassword \home\mtextuser\Willkommen_0001
+```
+
+![image](https://user-images.githubusercontent.com/8683821/147468627-65b6dcb2-17b3-46dd-bf3c-52c9b7e3c139.png)
