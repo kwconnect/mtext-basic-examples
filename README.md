@@ -38,3 +38,17 @@ Arguments:
 java mtext.examples.CreateConnection mtextuser mtextpassword
 ```
 
+### CreateDocument
+The class `mtext.examples.CreateDocument` demonstrates how to create a persistent M/TEXT document based on a given data binding.
+
+Arguments
+1. name of a technical user that is allowed to login to the M/TEXT server
+2. password of the technical user
+3. the project that contains the template
+4. the template url (e. g. \\bsp_Anschreiben\Vorlagen\Willkommen.template)
+5. the name of the data source
+6. the path to the data source file (XML or JSON)
+
+```
+java mtext.examples.CreateConnection mtextuser mtextpassword bsp_Anschreiben \\bsp_Anschreiben\Vorlagen\Willkommen.template Brief D:\workspace\bsp_Global\Testdaten\Daten_01.xml
+```
