@@ -22,15 +22,15 @@ public class CreateConnection {
 	public static void main(String[] args) {
 
 		// check whether we have correct number of arguments
-		MUtil.checkArguments(args, 2, "Usage: java mtext.examples.CreateConnection <name> <password>");
+		MUtil.checkArguments(args, 2, CreateConnection.class, "<username> <password>");
 
 		// initializations
 		MTextClient client = null;
 
 		try {
-			// connect to the server with the arguments name and password
+			// connect to the client with the arguments name and password
 			client = MTextFactory.connect(args[0], args[1], null);
-			System.out.println("Created the connection succesfully!");
+			System.out.println("Successfully connected to M/TEXT Client!");
 			
 			client.close();
 			System.out.println("The connection is closed!");

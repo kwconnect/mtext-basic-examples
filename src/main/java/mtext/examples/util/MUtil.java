@@ -10,7 +10,7 @@ public final class MUtil {
 	private MUtil() {
 	}
 
-	public static void checkArguments(String[] args, int argumentCount, String usageMessage) {
+	public static void checkArguments(String[] args, int argumentCount, Class<?> theClass, String usageMessage) {
 
 		if (args.length == argumentCount) {
 			return;
@@ -23,7 +23,7 @@ public final class MUtil {
 				System.err.println("You have to enter " + argumentCount + " arguments");
 			}
 
-			throw new IllegalArgumentException(usageMessage);
+			throw new IllegalArgumentException("Usage: " + theClass.getName() + " " + usageMessage);
 		}
 	}
 
