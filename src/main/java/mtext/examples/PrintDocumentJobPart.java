@@ -16,7 +16,7 @@ import de.kwsoft.mtext.api.client.MTextFactory;
  * job.
  * 
  **/
-public class PrintDocumentJob {
+public class PrintDocumentJobPart {
 
 	/**
 	 * Prints a document several times using one print job.
@@ -29,7 +29,7 @@ public class PrintDocumentJob {
 	 **/
 	public static void main(String[] args) {
 
-		MUtil.checkArguments(args, 4, PrintDocumentJob.class, "<username> <password> <document name> <destination name>");
+		MUtil.checkArguments(args, 4, PrintDocumentJobPart.class, "<username> <password> <document name> <destination name>");
 		final String username = args[0];
 		final String password = args[1];
 		final String fullQualifiedDocumentName = args[2];
