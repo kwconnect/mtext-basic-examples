@@ -87,6 +87,27 @@ Successfully printed the document to M/OMS.
 The M/OMS Input ID is 58
 ```
 
+### PrintDocumentJobPart
+The class `mtext.examples.PrintDocumentJobPart` demonstrates how to print more than one document with a single job. 
+
+The example makes use of the Configuration Parameter `de.kwsoft.mtext.api.ConfigurationFactory.PRINT_JOB_PART`. One concatenated print stream will be produced from all the documents.
+
+Arguments
+1. name of a technical user that is allowed to login to the M/TEXT server
+2. password of the technical user
+3. the fully qualified name of an existing M/TEXT document
+4. the name of the print destination
+
+```
+java mtext.examples.PrintDocumentJobPart mtextuser mtextpassword \home\seriem\mtext_example_0001 OMS
+Added document to job \home\seriem\Willkommen_0001
+Added document to job \home\seriem\Willkommen_0001
+Added document to job \home\seriem\Willkommen_0001
+Added document to job \home\seriem\Willkommen_0001
+Added document to job \home\seriem\Willkommen_0001
+Successfully executed print job.
+```
+
 ### GetDocumentInformation
 The class `mtext.examples.GetDocumentInformation` demonstrates how to get DocumentInformation for Documents and Models by iterating over 
 all DocumentIformations of the given folder.
