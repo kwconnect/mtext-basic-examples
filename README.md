@@ -108,6 +108,33 @@ Added document to job \home\seriem\Willkommen_0001
 Successfully executed print job.
 ```
 
+### PrintDocumentMultithreaded
+The class `mtext.examples.PrintDocumentMultithreaded` demonstrates how to print documents in parallel. It uses a given number of threads and jobs to control the throughput.
+
+Arguments
+1. name of a technical user that is allowed to login to the M/TEXT server
+2. password of the technical user
+3. the fully qualified name of an existing M/TEXT document
+4. the name of the print destination
+5. the number of jobs per thread
+6. the number of threads
+
+```
+java mtext.examples.PrintDocumentMultithreaded mtextuser mtextpassword \home\seriem\mtext_example_0001 OMS 2 3
+Thread: 12, job: 0
+Thread: 13, job: 0
+Thread: 11, job: 0
+Successfully printed document \home\seriem\mtext_example_0001
+Thread: 11, job: 1
+Successfully printed document \home\seriem\mtext_example_0001
+Thread: 13, job: 1
+Successfully printed document \home\seriem\mtext_example_0001
+Thread: 12, job: 1
+Successfully printed document \home\seriem\mtext_example_0001
+Successfully printed document \home\seriem\mtext_example_0001
+Successfully printed document \home\seriem\mtext_example_0001
+```
+
 ### GetDocumentInformation
 The class `mtext.examples.GetDocumentInformation` demonstrates how to get DocumentInformation for Documents and Models by iterating over 
 all DocumentIformations of the given folder.
