@@ -54,7 +54,7 @@ Arguments
 ```
 java mtext.examples.CreateDocument mtextuser mtextpassword bsp_Anschreiben \\bsp_Anschreiben\Vorlagen\Willkommen.template Brief D:\workspace\bsp_Global\Testdaten\Daten_01.xml
 Successfully connected to M/TEXT Client!
-Successfully created document: \home\seriem\mtext_example_0003
+Successfully created document: \home\mtextuser\mtext_example_0003
 ```
 
 ### ExportPDF
@@ -82,7 +82,7 @@ Arguments
 3. the fully qualified name of an existing M/TEXT document
 
 ```
-java mtext.examples.PrintDocument mtextuser mtextpassword \home\seriem\mtext_example_0001
+java mtext.examples.PrintDocument mtextuser mtextpassword \home\mtextuser\mtext_example_0001
 Successfully printed the document to M/OMS.
 The M/OMS Input ID is 58
 ```
@@ -99,12 +99,12 @@ Arguments
 4. the name of the print destination
 
 ```
-java mtext.examples.PrintDocumentJobPart mtextuser mtextpassword \home\seriem\mtext_example_0001 OMS
-Added document to job \home\seriem\Willkommen_0001
-Added document to job \home\seriem\Willkommen_0001
-Added document to job \home\seriem\Willkommen_0001
-Added document to job \home\seriem\Willkommen_0001
-Added document to job \home\seriem\Willkommen_0001
+java mtext.examples.PrintDocumentJobPart mtextuser mtextpassword \home\mtextuser\mtext_example_0001 OMS
+Added document to job \home\mtextuser\mtext_example_0001
+Added document to job \home\mtextuser\mtext_example_0001
+Added document to job \home\mtextuser\mtext_example_0001
+Added document to job \home\mtextuser\mtext_example_0001
+Added document to job \home\mtextuser\mtext_example_0001
 Successfully executed print job.
 ```
 
@@ -120,19 +120,19 @@ Arguments
 6. the number of threads
 
 ```
-java mtext.examples.PrintDocumentMultithreaded mtextuser mtextpassword \home\seriem\mtext_example_0001 OMS 2 3
+java mtext.examples.PrintDocumentMultithreaded mtextuser mtextpassword \home\mtextuser\mtext_example_0001 OMS 2 3
 Thread: 12, job: 0
 Thread: 13, job: 0
 Thread: 11, job: 0
-Successfully printed document \home\seriem\mtext_example_0001
+Successfully printed document \home\mtextuser\mtext_example_0001
 Thread: 11, job: 1
-Successfully printed document \home\seriem\mtext_example_0001
+Successfully printed document \home\mtextuser\mtext_example_0001
 Thread: 13, job: 1
-Successfully printed document \home\seriem\mtext_example_0001
+Successfully printed document \home\mtextuser\mtext_example_0001
 Thread: 12, job: 1
-Successfully printed document \home\seriem\mtext_example_0001
-Successfully printed document \home\seriem\mtext_example_0001
-Successfully printed document \home\seriem\mtext_example_0001
+Successfully printed document \home\mtextuser\mtext_example_0001
+Successfully printed document \home\mtextuser\mtext_example_0001
+Successfully printed document \home\mtextuser\mtext_example_0001
 ```
 
 ### GetDocumentInformation
@@ -147,7 +147,7 @@ Arguments
 ```
 java mtext.examples.GetDocumentInformation mtextuser mtextpassword \home\mtextuser
 Dumping DocumentInformation for folder \home\mtextuser
-Document: Willkommen_0001
+Document: mtext_example_0001
          Qualified Name : \home\mtextuser\Wilkommen_0001
          Description    : 
          Created        :2021-12-15 10:44:03.94
@@ -234,7 +234,7 @@ Arguments
 
 ```
 java mtext.examples.ImportDocument mtextuser mtextpassword \home\mtextuser D:\temp\exported.mtxz imported_0001
-Successfully imported document \home\seriem\imported_0001
+Successfully imported document \home\mtextuser\imported_0001
 ```
 
 ### OpenTemplateSelectionDialog
@@ -309,7 +309,7 @@ Arguments
 3. fully qualified name of the M/TEXT document that is to be edited
 
 ```
-java mtext.examples.OpenClassicEditor mtextuser mtextpassword \home\mtextuser\Willkommen_0001
+java mtext.examples.OpenClassicEditor mtextuser mtextpassword \home\mtextuser\mtext_example_0001
 ```
 
 ![image](https://user-images.githubusercontent.com/8683821/147468627-65b6dcb2-17b3-46dd-bf3c-52c9b7e3c139.png)
