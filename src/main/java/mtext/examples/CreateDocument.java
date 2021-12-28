@@ -96,9 +96,9 @@ public class CreateDocument {
 			System.out.println("Failed to creat M/TEXT document!");
 			mte.printStackTrace();
 		}
-		// close the client
 		finally {
-			if (client != null) {
+			// close the client
+			if (client != null && !client.isClosed()) {
 				client.close();
 			}
 		}

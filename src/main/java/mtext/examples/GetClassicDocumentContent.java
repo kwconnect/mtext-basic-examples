@@ -151,11 +151,10 @@ public class GetClassicDocumentContent {
 		catch (MTextException e) {
 			System.out.println("Cannot connect to m/text server '");
 			e.printStackTrace();
-			return;
 		}
 		finally {
-			if (client != null) {
-				// close client
+			// close the client
+			if (client != null && !client.isClosed()) {
 				client.close();
 			}
 		}

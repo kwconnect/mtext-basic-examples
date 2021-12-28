@@ -80,7 +80,7 @@ public class PrintDocument {
 		finally {
 
 			// close the client
-			if (client != null) {
+			if (client != null && !client.isClosed()) {
 				client.close();
 			}
 		}

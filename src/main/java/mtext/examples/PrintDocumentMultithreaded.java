@@ -22,7 +22,7 @@ public class PrintDocumentMultithreaded {
 	 * Prints a document multiple times in multiple threads.
 	 * 
 	 * @param args Command line arguments<br>
-	 *             args[0] = name<br>
+	 *             args[0] = username<br>
 	 *             args[1] = password<br>
 	 *             args[3] = document name<br>
 	 *             args[4] = destination name<br>
@@ -58,10 +58,11 @@ public class PrintDocumentMultithreaded {
 						System.out.println("Cannot print the document!");
 						mte.printStackTrace();
 					}
-					// close the client
 					finally {
-						if (client != null)
+						// close the client
+						if (client != null && !client.isClosed()) {
 							client.close();
+						}
 					}
 				}
 

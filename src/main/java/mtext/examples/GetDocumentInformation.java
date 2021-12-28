@@ -69,6 +69,12 @@ public class GetDocumentInformation {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
+		finally {
+			// close the client
+			if (client != null && !client.isClosed()) {
+				client.close();
+			}
+		}
 
 	}
 

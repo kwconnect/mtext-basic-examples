@@ -37,8 +37,8 @@ public class GetAllFolders {
 			me.printStackTrace();
 		}
 		finally {
-			if (client != null) {
-				// close client
+			// close the client
+			if (client != null && !client.isClosed()) {
 				client.close();
 			}
 		}

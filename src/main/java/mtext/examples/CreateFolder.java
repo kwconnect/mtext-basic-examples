@@ -57,7 +57,8 @@ public class CreateFolder {
 			e.printStackTrace();
 		}
 		finally {
-			if (client != null) {
+			// close the client
+			if (client != null && !client.isClosed()) {
 				client.close();
 			}
 		}

@@ -97,8 +97,8 @@ public class DeleteMetadata {
 			e.printStackTrace();
 		}
 		finally {
-			// close client
-			if (client != null) {
+			// close the client
+			if (client != null && !client.isClosed()) {
 				client.close();
 			}
 		}

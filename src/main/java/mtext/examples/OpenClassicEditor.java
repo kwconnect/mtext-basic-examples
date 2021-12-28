@@ -57,9 +57,9 @@ public class OpenClassicEditor {
 			System.out.println("Cannot call the editor for this document!");
 			mte.printStackTrace();
 		}
-		// close the client
 		finally {
-			if (client != null) {
+			// close the client
+			if (client != null && !client.isClosed()) {
 				client.close();
 			}
 		}

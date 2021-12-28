@@ -80,6 +80,7 @@ public class ImportDocument {
 			e.printStackTrace();
 		}
 		finally {
+			// close the client
 			if (client != null && !client.isClosed()) {
 				client.close();
 			}

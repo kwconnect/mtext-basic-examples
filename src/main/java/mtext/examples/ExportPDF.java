@@ -92,7 +92,6 @@ public class ExportPDF {
 			// M/Text exception occurred
 			mte.printStackTrace();
 		}
-		// close the client
 		finally {
 
 			if (fileOutputStream != null) {
@@ -104,7 +103,8 @@ public class ExportPDF {
 				}
 			}
 
-			if (client != null) {
+			// close the client
+			if (client != null && !client.isClosed()) {
 				client.close();
 			}
 		}

@@ -63,7 +63,7 @@ public class OpenClassicPreview {
 		}
 		finally {
 			// close the client
-			if (client != null) {
+			if (client != null && !client.isClosed()) {
 				client.close();
 			}
 		}

@@ -36,11 +36,13 @@ public class OpenTemplateSelectionDialog {
 		if (args.length > 2) {
 			sparte = args[2];
 		}
+		
+		MTextClient client = null;
 
 		try {
 
 			// initializations
-			MTextClient client = MTextFactory.connect(username, password, null);
+			client = MTextFactory.connect(username, password, null);
 
 			ClientConfigurationFactory configurationFactory = (ClientConfigurationFactory) client.getConfigurationFactory();
 
@@ -56,6 +58,12 @@ public class OpenTemplateSelectionDialog {
 		}
 		catch (Exception e) {
 			e.printStackTrace();
+		}
+		finally {
+			// close the client
+			if (client != null && !client.isClosed()) {
+				client.close();
+			}
 		}
 
 	}
